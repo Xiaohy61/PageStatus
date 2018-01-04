@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PageStatus</string>
+    <string name="no_data_tip">抱歉，暂无相关数据...</string>
+    <string name="internet_error_tip">网络出现错误...</string>
+    <string name="click_retry">点我重试</string>
+    <string name="happen_error">发生错误...</string>
+</resources>

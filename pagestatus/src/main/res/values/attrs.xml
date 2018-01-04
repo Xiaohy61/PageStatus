@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PageStatus">
+        <attr name="LoadingTipText" format="string"/>
+        <attr name="LoadingTipTextColor" format="color"/>
+        <attr name="noDataImage" format="reference"/>
+        <attr name="noDataTipText" format="string"/>
+        <attr name="noDataTipTextColor" format="color"/>
+        <attr name="internetErrorImage" format="reference"/>
+        <attr name="internetErrorTipText" format="string"/>
+        <attr name="internetErrorTipTextColor" format="color"/>
+        <attr name="errorImage" format="reference"/>
+        <attr name="btnRetryText" format="string"/>
+        <attr name="btnRetryTextColor" format="color"/>
+        <attr name="errorTipText" format="string"/>
+        <attr name="errorTipTextColor" format="color"/>
+    </declare-styleable>
+
+</resources>
