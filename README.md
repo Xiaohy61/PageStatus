@@ -1,7 +1,7 @@
 # PageStatus
 效果图
 
-![](https://github.com/Xiaohy61/PageStatus/blob/master/2018-01-05_11_00_30.gif)
+
 
 ### 依赖：
 ``` xml
