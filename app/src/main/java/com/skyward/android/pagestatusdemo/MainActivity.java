@@ -12,6 +12,9 @@ import com.skyward.pagestatus.PageStatusValue;
 public class MainActivity extends AppCompatActivity {
 
     private PageStatus page_status_layout;
+    private Runnable runnable;
+    private Handler handler;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,40 @@ public class MainActivity extends AppCompatActivity {
 
         page_status_layout.setPageStatus(PageStatusValue.loading);
 
+
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                switch (count) {
+                    case 0:
+                        page_status_layout.setPageStatus(PageStatusValue.loadingSuccess);
+                        break;
+                    case 1:
+                        page_status_layout.setPageStatus(PageStatusValue.loadingError);
+                        break;
+                    case 2:
+                        page_status_layout.setPageStatus(PageStatusValue.noData);
+                        break;
+                    case 3:
+                        page_status_layout.setPageStatus(PageStatusValue.internetError);
+                        break;
+                    default:
+                        break;
+
+                }
+                count++;
+                if (count > 4) {
+                    handler.removeCallbacks(runnable);
+                    return;
+                }
+                handler.postDelayed(this, 2000);
+
+            }
+        };
+
+        handler.postDelayed(runnable, 2000);
+
         page_status_layout.setOnRetryListener(new OnRetryListener() {
             @Override
             public void retry(View v) {
@@ -30,36 +67,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page_status_layout.setPageStatus(PageStatusValue.loadingSuccess);
-
-            }
-        },2000);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page_status_layout.setPageStatus(PageStatusValue.loadingError);
-
-            }
-        },4000);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page_status_layout.setPageStatus(PageStatusValue.noData);
-
-            }
-        },6000);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page_status_layout.setPageStatus(PageStatusValue.internetError);
-
-            }
-        },8000);
     }
 }

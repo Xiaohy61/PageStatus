@@ -8,5 +8,9 @@ import android.view.View;
  * desc:
  */
 public interface OnRetryListener {
+    /**
+     * 网络断开，点击重试
+     * @param v view
+     */
     void retry(View v);
 }
