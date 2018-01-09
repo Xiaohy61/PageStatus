@@ -15,11 +15,12 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        PageStatus.pageStatusConfig()
-                .buttonRetryText("点我重试")
-                .loadingTipText("")
-                .internetErrorTipText("网络出现错误...")
-                .noDataTipText("抱歉，暂无相关数据...")
-                .errorTipText("出错啦...");
+
+        new PageStatus.Builder()
+                .setLoadingTipText("数据加载中...")
+                .setInternetErrorText("网络出现错误...")
+                .setBtnRetryText("点我重试")
+                .setErrorTipText("发生错误...")
+                .setNoDataTipText("抱歉暂无相关数据!");
     }
 }
