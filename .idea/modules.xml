@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PageStatus.iml" filepath="$PROJECT_DIR$/PageStatus.iml" />
-      <module fileurl="file://F:\androidOtherProject\PageStatus\PageStatusDemo.iml" filepath="F:\androidOtherProject\PageStatus\PageStatusDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://F:\androidOtherProject\PageStatus\app\app.iml" filepath="F:\androidOtherProject\PageStatus\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/pagestatus/pagestatus.iml" filepath="$PROJECT_DIR$/pagestatus/pagestatus.iml" />
-      <module fileurl="file://F:\androidOtherProject\PageStatus\pagestatus\pagestatus.iml" filepath="F:\androidOtherProject\PageStatus\pagestatus\pagestatus.iml" />
     </modules>
   </component>
 </project>

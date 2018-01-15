@@ -8,6 +8,10 @@ import com.skyward.pagestatus.PageStatus;
  * @author: skyward
  * date: 2018/1/4 0004
  * desc:
+ * gradlew install
+ * gradlew bintrayUpload
+ *
+ * 更新版本号：gradlew clean build bintrayUpload -PdryRun=false
  */
 public class App extends Application {
 
