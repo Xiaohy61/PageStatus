@@ -4,15 +4,28 @@
 <img width="50%" height="50%" src="https://github.com/Xiaohy61/PageStatus/blob/master/2018-01-05_11_00_30.gif"/>
 
 ### 依赖：
+
+``` xml
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+
+		}
+	}
+```
 ``` xml
   dependencies {
-  
-   compile 'com.skyward.pagestatus:pagestatus:1.0.0'
-   
-  }
+
+	    compile 'com.github.Xiaohy61:PageStatus:1.0.1'
+
+	}
+
 ```
+
 ### 配置
 1. 可以在application全局配置：
+
 ```xml
 public class App extends Application {
 
@@ -20,13 +33,12 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         //图片，文字，文字颜色都可以自己配置，或者只配置文字
-        PageStatus.pageStatusConfig()
-                .errorImage(R.drawable.error_icon)
-                .buttonRetryText("点我重试")
-                .loadingTipText("")
-                .internetErrorTipText("网络出现错误...")
-                .noDataTipText("抱歉，暂无相关数据...")
-                .errorTipText("出错啦...");
+        new PageStatus.Builder()
+                .setLoadingTipText("数据加载中...")
+                .setInternetErrorText("网络出现错误...")
+                .setBtnRetryText("点我重试")
+                .setErrorTipText("发生错误...")
+                .setNoDataTipText("抱歉暂无相关数据!");
     }
 }
 ```
