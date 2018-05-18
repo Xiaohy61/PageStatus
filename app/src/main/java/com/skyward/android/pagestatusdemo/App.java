@@ -10,7 +10,7 @@ import com.skyward.pagestatus.PageStatus;
  * desc:
  * gradlew install
  * gradlew bintrayUpload
- *
+ * <p>
  * 更新版本号：gradlew clean build bintrayUpload -PdryRun=false
  */
 public class App extends Application {
@@ -22,9 +22,12 @@ public class App extends Application {
 
         new PageStatus.Builder()
                 .setLoadingTipText("数据加载中...")
-                .setInternetErrorText("网络出现错误...")
+                .setNetworkErrorTipText("网络出现错误...")
                 .setBtnRetryText("点我重试")
-                .setErrorTipText("发生错误...")
-                .setNoDataTipText("抱歉暂无相关数据!");
+                .setDataErrorTipText("发生错误...")
+                .setEmptyDataTipText("抱歉暂无相关数据!")
+                .setEmptyOrderTipText("还没有相关订单")
+                .setEmptyMsgTipText("还没有相关消息呢")
+                .setEmptyCartTipText("购物车还是空的哦~");
     }
 }

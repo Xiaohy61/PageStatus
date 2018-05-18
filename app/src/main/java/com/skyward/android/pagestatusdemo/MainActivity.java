@@ -1,69 +1,72 @@
 package com.skyward.android.pagestatusdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.skyward.pagestatus.OnRetryListener;
-import com.skyward.pagestatus.PageStatus;
-import com.skyward.pagestatus.PageStatusValue;
-
 public class MainActivity extends AppCompatActivity {
 
-    private PageStatus page_status_layout;
-    private Runnable runnable;
-    private Handler handler;
-    int count = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        page_status_layout = findViewById(R.id.page_status_layout);
-
-        page_status_layout.setPageStatus(PageStatusValue.loading);
-
-
-        handler = new Handler();
-        runnable = new Runnable() {
+        //数据加载中
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                switch (count) {
-                    case 0:
-                        page_status_layout.setPageStatus(PageStatusValue.loadingSuccess);
-                        break;
-                    case 1:
-                        page_status_layout.setPageStatus(PageStatusValue.loadingError);
-                        break;
-                    case 2:
-                        page_status_layout.setPageStatus(PageStatusValue.noData);
-                        break;
-                    case 3:
-                        page_status_layout.setPageStatus(PageStatusValue.internetError);
-                        break;
-                    default:
-                        break;
-
-                }
-                count++;
-                if (count > 4) {
-                    handler.removeCallbacks(runnable);
-                    return;
-                }
-                handler.postDelayed(this, 2000);
-
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),LoadingActivity.class));
             }
-        };
+        });
 
-        handler.postDelayed(runnable, 2000);
-
-        page_status_layout.setOnRetryListener(new OnRetryListener() {
+        //没有相关数据
+        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void retry(View v) {
-                page_status_layout.setPageStatus(PageStatusValue.loadingSuccess);
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EmptyDataActivity.class));
+            }
+        });
+
+        //网络出现错误
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),NetworkErrorActivity.class));
+            }
+        });
+
+        //数据出现错误
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),DataErrorActivity.class));
+            }
+        });
+
+        //没有相关订单
+        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EmptyOrderActivity.class));
+            }
+        });
+
+        //没有相关消息
+        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EmptyMsgActivity.class));
+            }
+        });
+
+        //购物车是空的
+        findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EmptyCartActivity.class));
             }
         });
 

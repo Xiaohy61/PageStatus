@@ -4,17 +4,26 @@
     <declare-styleable name="PageStatus">
         <attr name="LoadingTipText" format="string"/>
         <attr name="LoadingTipTextColor" format="color"/>
-        <attr name="noDataImage" format="reference"/>
-        <attr name="noDataTipText" format="string"/>
-        <attr name="noDataTipTextColor" format="color"/>
-        <attr name="internetErrorImage" format="reference"/>
-        <attr name="internetErrorTipText" format="string"/>
-        <attr name="internetErrorTipTextColor" format="color"/>
-        <attr name="errorImage" format="reference"/>
+        <attr name="emptyDataImage" format="reference"/>
+        <attr name="emptyDataTipText" format="string"/>
+        <attr name="emptyDataTipTextColor" format="color"/>
+        <attr name="networkErrorImage" format="reference"/>
+        <attr name="networkErrorTipText" format="string"/>
+        <attr name="networkErrorTipTextColor" format="color"/>
+        <attr name="dataErrorImage" format="reference"/>
         <attr name="btnRetryText" format="string"/>
         <attr name="btnRetryTextColor" format="color"/>
-        <attr name="errorTipText" format="string"/>
-        <attr name="errorTipTextColor" format="color"/>
+        <attr name="dataErrorTipText" format="string"/>
+        <attr name="dataErrorTipTextColor" format="color"/>
+        <attr name="emptyOrderText" format="string"/>
+        <attr name="emptyMsgText" format="string"/>
+        <attr name="emptyCartText" format="string"/>
+        <attr name="emptyOrderImage" format="reference"/>
+        <attr name="emptyMsgImage" format="reference"/>
+        <attr name="emptyCartImage" format="reference"/>
+        <attr name="emptyOrderTextColor" format="color"/>
+        <attr name="emptyMsgTextColor" format="color"/>
+        <attr name="emptyCartTextColor" format="color"/>
         <attr name="pageStatusBackground" format="color"/>
         <attr name="isVisibleContent" format="boolean"/>
     </declare-styleable>

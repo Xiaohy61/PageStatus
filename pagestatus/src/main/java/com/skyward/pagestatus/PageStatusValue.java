@@ -6,9 +6,36 @@ package com.skyward.pagestatus;
  * desc:
  */
 public class PageStatusValue {
-    public final static int loading = 1;
-    public final static int loadingSuccess = 2;
-    public final static int internetError=3;
-    public final static int noData = 4;
-    public final static int loadingError =5;
+    /**
+     * 数据加载中
+     */
+    public final static int LOADING = 1;
+    /**
+     * 数据加载完成
+     */
+    public final static int LOADING_SUCCESS = 2;
+    /**
+     * 网络错误
+     */
+    public final static int NETWORK_ERROR=3;
+    /**
+     * 没有数据
+     */
+    public final static int EMPTY_DATA = 4;
+    /**
+     * 数据错误
+     */
+    public final static int DATE_ERROR =5;
+    /**
+     * 购物车为空
+     */
+    public final static int EMPTY_CART =6;
+    /**
+     * 订单为空
+     */
+    public final static int EMPTY_ORDER =7;
+    /**
+     * 消息为空
+     */
+    public final static int EMPTY_MSG = 8;
 }

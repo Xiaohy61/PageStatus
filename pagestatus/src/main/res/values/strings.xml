@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">PageStatus</string>
     <string name="no_data_tip">抱歉，暂无相关数据...</string>
-    <string name="internet_error_tip">网络出现错误...</string>
+    <string name="internet_error_tip">网络出现错误啦...</string>
     <string name="click_retry">点我重试</string>
-    <string name="happen_error">发生错误...</string>
+    <string name="happen_error">数据发生错误了...</string>
+    <string name="empty_order">还没有相关订单</string>
+    <string name="empty_msg">还没有相关消息呢</string>
+    <string name="empty_cart">购物车还是空的哦~</string>
 </resources>
