@@ -1,7 +1,7 @@
 # PageStatus Android 页面状态管理
 效果图
 
-<img width="50%" height="50%" src="http://om8encbr2.bkt.clouddn.com/1526645528622mzskyward.gif"/>
+<img width="50%" height="50%" src="https://github.com/Xiaohy61/PageStatus/blob/master/1526645528622mzskyward.gif"/>
 
 ### 依赖：
 
