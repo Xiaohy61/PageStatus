@@ -16,7 +16,7 @@ allprojects {
 ``` xml
   dependencies {
 
-	      implementation 'com.github.Xiaohy61:PageStatus:1.0.2'
+	      implementation 'com.github.Xiaohy61:PageStatus:1.0.3'
 
 	}
 
