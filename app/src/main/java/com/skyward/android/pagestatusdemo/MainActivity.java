@@ -70,5 +70,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),SearchingActivity.class));
+            }
+        });
+
+        findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),NoSearchActivity.class));
+            }
+        });
+
     }
 }

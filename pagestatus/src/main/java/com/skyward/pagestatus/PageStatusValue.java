@@ -38,4 +38,14 @@ public class PageStatusValue {
      * 消息为空
      */
     public final static int EMPTY_MSG = 8;
+
+    /**
+     * 搜索中
+     */
+    public final static int SEARCHING = 9;
+
+    /**
+     * 搜索没有结果
+     */
+    public final static int NO_SEARCH_RESULT = 10;
 }

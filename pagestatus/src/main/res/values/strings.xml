@@ -7,4 +7,8 @@
     <string name="empty_order">还没有相关订单</string>
     <string name="empty_msg">还没有相关消息呢</string>
     <string name="empty_cart">购物车还是空的哦~</string>
+    <string name="searching">正在搜索中...</string>
+    <string name="no_search_result">没有搜到相关游戏的礼包</string>
+    <string name="btn_search">换个关键字试试</string>
 </resources>
+

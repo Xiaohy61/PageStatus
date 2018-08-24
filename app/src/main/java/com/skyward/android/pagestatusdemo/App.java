@@ -28,6 +28,10 @@ public class App extends Application {
                 .setEmptyDataTipText("抱歉暂无相关数据!")
                 .setEmptyOrderTipText("还没有相关订单")
                 .setEmptyMsgTipText("还没有相关消息呢")
-                .setEmptyCartTipText("购物车还是空的哦~");
+                .setEmptyCartTipText("购物车还是空的哦~")
+                .setSearchingTipText("搜索中...")
+                .setNoSearchTipText("没有搜到相关游戏的礼包")
+                .setBtnNoSearchTipText("换个关键字试试");
+
     }
 }

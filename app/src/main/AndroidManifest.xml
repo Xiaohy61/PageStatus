@@ -31,6 +31,10 @@
         </activity>
         <activity android:name=".EmptyCartActivity">
         </activity>
+        <activity android:name=".SearchingActivity">
+        </activity>
+        <activity android:name=".NoSearchActivity">
+        </activity>
     </application>
 
 </manifest>

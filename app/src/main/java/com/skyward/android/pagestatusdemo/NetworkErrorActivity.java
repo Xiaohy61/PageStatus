@@ -27,5 +27,7 @@ public class NetworkErrorActivity extends AppCompatActivity {
                 mPageStatus.setPageStatus(PageStatusValue.LOADING_SUCCESS);
             }
         });
+
+
     }
 }

@@ -26,6 +26,18 @@
         <attr name="emptyCartTextColor" format="color"/>
         <attr name="pageStatusBackground" format="color"/>
         <attr name="isVisibleContent" format="boolean"/>
+
+        <attr name="searchingTipText" format="string"/>
+        <attr name="searchingTipColor" format="color"/>
+        <attr name="searchingImage" format="reference"/>
+
+        <attr name="noSearchTipText" format="string"/>
+        <attr name="noSearchTipColor" format="color"/>
+        <attr name="noSearchImage" format="reference"/>
+
+        <attr name="btnNoSearchText" format="string"/>
+        <attr name="btnNoSearchTextColor" format="color"/>
+
     </declare-styleable>
 
 </resources>

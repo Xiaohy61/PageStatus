@@ -23,6 +23,8 @@ import static com.skyward.pagestatus.PageStatusValue.EMPTY_ORDER;
 import static com.skyward.pagestatus.PageStatusValue.LOADING;
 import static com.skyward.pagestatus.PageStatusValue.LOADING_SUCCESS;
 import static com.skyward.pagestatus.PageStatusValue.NETWORK_ERROR;
+import static com.skyward.pagestatus.PageStatusValue.NO_SEARCH_RESULT;
+import static com.skyward.pagestatus.PageStatusValue.SEARCHING;
 
 
 /**
@@ -63,6 +65,17 @@ public class PageStatus extends FrameLayout {
     private ImageView mEmptyCartImage;
     private TextView mEmptyCartTipText;
 
+    private LinearLayout mSearchingLayout;
+    private ImageView mSearchingImage;
+    private TextView mSearchingTipText;
+
+    private LinearLayout mNoSearchLayout;
+    private ImageView mNOSearchImage;
+    private TextView mNoSearchTipText;
+    private Button btnSearch;
+
+
+
 
     private Context mContext;
     /**
@@ -97,6 +110,13 @@ public class PageStatus extends FrameLayout {
      * 购物车为空提示文本
      */
     private String emptyCartStr;
+
+    private String searchingStr;
+    private String noSearchStr;
+    private String btnNoSearchStr;
+
+
+
     /**
      * PageStatus 包含的布局是否可见，默认可见，改为false，被它包含的布局不可见
      */
@@ -126,6 +146,12 @@ public class PageStatus extends FrameLayout {
      * 购物车为空提示图片
      */
     private int emptyCartImageAttr;
+
+
+    private int searchIngImageAttr;
+    private int noSearchImageAttr;
+
+
 
     /**
      * 数据加载中提示文本颜色
@@ -159,6 +185,11 @@ public class PageStatus extends FrameLayout {
      * 购物车为空提示文本颜色
      */
     private int emptyCartTextColor;
+
+    private int searchingTextColor;
+    private int noSearchTextColor;
+    private int btnNoSearchTextColor;
+
     private int background;
 
     private static String builderLoadingTipText;
@@ -169,6 +200,10 @@ public class PageStatus extends FrameLayout {
     private static String builderEmptyOrderText;
     private static String builderEmptyMsgText;
     private static String builderEmptyCartText;
+    private static String builderSearchingTipText;
+    private static String builderNoSearchTipText;
+    private static String builderbtnNoSearchText;
+
 
     private static @DrawableRes
     int builderEmptyDataImage = 0;
@@ -182,6 +217,10 @@ public class PageStatus extends FrameLayout {
     int builderEmptyMsgImage = 0;
     private static @DrawableRes
     int builderEmptyCartImage = 0;
+    private static @DrawableRes
+    int builderSearchingImage =0;
+    private static @DrawableRes
+    int builderNoSearchImage =0;
 
     private static @ColorRes
     int builderNetworkErrorTipTextColor = 0;
@@ -201,8 +240,20 @@ public class PageStatus extends FrameLayout {
     int builderEmptyMsgColor = 0;
     private static @ColorRes
     int builderEmptyCartColor = 0;
+    private static @ColorRes
+    int builderSearchingTextColor = 0;
+    private static @ColorRes
+    int builderNoSearchTextColor =0;
+    private static @ColorRes
+    int builderNoSearchBtnTextColor = 0;
+
+
+
+
+
 
     private OnRetryListener mOnRetryListener;
+    private OnSearchClick mOnSearchClick;
 
 
     public static class Builder {
@@ -285,6 +336,21 @@ public class PageStatus extends FrameLayout {
             return this;
         }
 
+        public Builder setSearchingTipText(String text){
+            PageStatus.builderSearchingTipText =text;
+            return this;
+        }
+
+        public Builder setNoSearchTipText(String text){
+            PageStatus.builderNoSearchTipText = text;
+            return this;
+        }
+        public Builder setBtnNoSearchTipText(String text){
+            PageStatus.builderbtnNoSearchText = text;
+            return this;
+        }
+
+
         /**
          * 设置数据为空图片
          * @param drawable drawable
@@ -342,6 +408,18 @@ public class PageStatus extends FrameLayout {
             PageStatus.builderEmptyCartImage = drawable;
             return this;
         }
+
+        public Builder setSearchingImage(@DrawableRes int drawable){
+            PageStatus.builderSearchingImage = drawable;
+            return this;
+        }
+
+        public Builder setNosearchImage(@DrawableRes int drawable){
+            PageStatus.builderNoSearchImage = drawable;
+            return this;
+        }
+
+
         /**
          * 设置加载进度文本颜色
          * @param color color
@@ -416,6 +494,21 @@ public class PageStatus extends FrameLayout {
             return this;
         }
 
+        public Builder setSearchingTextColor(@ColorRes int color){
+            PageStatus.builderNoSearchTextColor = color;
+            return this;
+        }
+
+        public Builder setNoSearchTextColor(@ColorRes int color){
+            PageStatus.builderNoSearchTextColor = color;
+            return this;
+        }
+
+        public Builder setNoSearchBtnTextColor(@ColorRes int color){
+            PageStatus.builderNoSearchBtnTextColor = color;
+            return this;
+        }
+
         public Builder setBackgroundColor(@ColorRes int color) {
             PageStatus.builderBackgroundColor = color;
             return this;
@@ -440,6 +533,11 @@ public class PageStatus extends FrameLayout {
         this.mOnRetryListener = onRetryListener;
     }
 
+    public void setOnSearchListener(OnSearchClick onSearchListener){
+        this.mOnSearchClick = onSearchListener;
+    }
+
+
     private void initTypeArray(Context context, AttributeSet attrs) {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PageStatus);
@@ -451,6 +549,9 @@ public class PageStatus extends FrameLayout {
         emptyOrderStr = typedArray.getString(R.styleable.PageStatus_emptyOrderText);
         emptyMsgStr = typedArray.getString(R.styleable.PageStatus_emptyMsgText);
         emptyCartStr = typedArray.getString(R.styleable.PageStatus_emptyCartText);
+        searchingStr = typedArray.getString(R.styleable.PageStatus_searchingTipText);
+        noSearchStr = typedArray.getString(R.styleable.PageStatus_noSearchTipText);
+        btnNoSearchStr = typedArray.getString(R.styleable.PageStatus_btnNoSearchText);
 
         emptyDataImageAttr = typedArray.getResourceId(R.styleable.PageStatus_emptyDataImage, R.drawable.no_data_icon);
         networkErrorImageAttr = typedArray.getResourceId(R.styleable.PageStatus_networkErrorImage, R.drawable.internet_error);
@@ -458,6 +559,10 @@ public class PageStatus extends FrameLayout {
         emptyOrderImageAttr = typedArray.getResourceId(R.styleable.PageStatus_emptyOrderImage, R.drawable.no_order_icon);
         emptyMsgImageAttr = typedArray.getResourceId(R.styleable.PageStatus_emptyMsgImage, R.drawable.no_message_icon);
         emptyCartImageAttr = typedArray.getResourceId(R.styleable.PageStatus_emptyCartImage, R.drawable.empty_cart_icon);
+        searchIngImageAttr = typedArray.getResourceId(R.styleable.PageStatus_searchingImage, R.drawable.searching_icon);
+        noSearchImageAttr = typedArray.getResourceId(R.styleable.PageStatus_noSearchImage, R.drawable.no_search_icon);
+
+
 
         loadingTipTextColor = typedArray.getColor(R.styleable.PageStatus_LoadingTipTextColor, ContextCompat.getColor(mContext, R.color.grey));
         emptyDataTipTextColor = typedArray.getColor(R.styleable.PageStatus_emptyDataTipTextColor, ContextCompat.getColor(mContext, R.color.grey));
@@ -467,6 +572,10 @@ public class PageStatus extends FrameLayout {
         emptyOrderTextColor = typedArray.getColor(R.styleable.PageStatus_emptyOrderTextColor, ContextCompat.getColor(mContext, R.color.grey));
         emptyMsgTextColor = typedArray.getColor(R.styleable.PageStatus_emptyMsgTextColor, ContextCompat.getColor(mContext, R.color.grey));
         emptyCartTextColor = typedArray.getColor(R.styleable.PageStatus_emptyCartTextColor, ContextCompat.getColor(mContext, R.color.grey));
+        searchingTextColor = typedArray.getColor(R.styleable.PageStatus_searchingTipText, ContextCompat.getColor(mContext, R.color.grey));
+        noSearchTextColor = typedArray.getColor(R.styleable.PageStatus_noSearchTipColor, ContextCompat.getColor(mContext, R.color.grey));
+        btnRetryTextColor = typedArray.getColor(R.styleable.PageStatus_noSearchTipColor, ContextCompat.getColor(mContext, R.color.grey));
+        btnNoSearchTextColor = typedArray.getColor(R.styleable.PageStatus_btnNoSearchTextColor,ContextCompat.getColor(mContext, R.color.grey));
 
         background = typedArray.getColor(R.styleable.PageStatus_pageStatusBackground, ContextCompat.getColor(mContext, R.color.white));
         isVisibleContent = typedArray.getBoolean(R.styleable.PageStatus_isVisibleContent, true);
@@ -512,6 +621,16 @@ public class PageStatus extends FrameLayout {
         mEmptyCartLayout = mView.findViewById(R.id.empty_cart_layout);
         mEmptyCartImage = mView.findViewById(R.id.empty_cart_image);
         mEmptyCartTipText = mView.findViewById(R.id.empty_cart_tip);
+
+        mSearchingLayout = mView.findViewById(R.id.searching_layout);
+        mSearchingTipText = mView.findViewById(R.id.searching_tip);
+        mSearchingImage = mView.findViewById(R.id.searching_image);
+
+        mNoSearchLayout = mView.findViewById(R.id.on_search_layout);
+        mNOSearchImage = mView.findViewById(R.id.on_search_image);
+        mNoSearchTipText = mView.findViewById(R.id.on_search_tip);
+        btnSearch = mView.findViewById(R.id.btn_search);
+
 
 
 
@@ -563,6 +682,26 @@ public class PageStatus extends FrameLayout {
             mEmptyCartTipText.setText(builderEmptyCartText);
         }
 
+        if (TextUtils.isEmpty(builderSearchingTipText)) {
+            mSearchingTipText.setText(searchingStr);
+        } else {
+            mSearchingTipText.setText(builderSearchingTipText);
+        }
+
+        if (TextUtils.isEmpty(builderNoSearchTipText)) {
+            mNoSearchTipText.setText(noSearchStr);
+        } else {
+            mNoSearchTipText.setText(builderNoSearchTipText);
+        }
+
+        if (TextUtils.isEmpty(builderbtnNoSearchText)) {
+            btnSearch.setText(btnNoSearchStr);
+        } else {
+            btnSearch.setText(builderbtnNoSearchText);
+        }
+
+
+
 
         mEmptyDataImage.setImageResource(builderEmptyDataImage == 0 ? emptyDataImageAttr : builderEmptyDataImage);
         mNetworkErrorImage.setImageResource(builderNetworkErrorImage == 0 ? networkErrorImageAttr : builderNetworkErrorImage);
@@ -570,6 +709,9 @@ public class PageStatus extends FrameLayout {
         mEmptyOrderImage.setImageResource(builderEmptyOrderImage == 0 ? emptyOrderImageAttr : builderEmptyOrderImage);
         mEmptyMsgImage.setImageResource(builderEmptyMsgImage == 0 ? emptyMsgImageAttr : builderEmptyMsgImage);
         mEmptyCartImage.setImageResource(builderEmptyCartImage == 0 ? emptyCartImageAttr : builderEmptyCartImage);
+        mSearchingImage.setImageResource(builderSearchingImage == 0 ? searchIngImageAttr : builderSearchingImage);
+        mNOSearchImage.setImageResource(builderNoSearchImage == 0 ? noSearchImageAttr : builderNoSearchImage);
+
 
         mProgressBarTipText.setTextColor(builderProgressBarTipTextColor == 0 ? loadingTipTextColor : ContextCompat.getColor(mContext, builderProgressBarTipTextColor));
         mEmptyDataTipText.setTextColor(builderEmptyDataTipTextColor == 0 ? emptyDataTipTextColor : ContextCompat.getColor(mContext, builderEmptyDataTipTextColor));
@@ -579,6 +721,10 @@ public class PageStatus extends FrameLayout {
         mEmptyOrderTipText.setTextColor(builderEmptyOrderColor == 0 ? emptyOrderTextColor : ContextCompat.getColor(mContext, builderEmptyOrderColor));
         mEmptyMsgTipText.setTextColor(builderEmptyMsgColor == 0 ? emptyMsgTextColor : ContextCompat.getColor(mContext, builderEmptyMsgColor));
         mEmptyCartTipText.setTextColor(builderEmptyCartColor == 0 ? emptyCartTextColor : ContextCompat.getColor(mContext, builderEmptyCartColor));
+        mSearchingTipText.setTextColor(builderSearchingTextColor == 0 ? searchingTextColor : ContextCompat.getColor(mContext, builderSearchingTextColor));
+        mNoSearchTipText.setTextColor(builderNoSearchTextColor == 0 ? noSearchTextColor : ContextCompat.getColor(mContext, builderNoSearchTextColor));
+        btnSearch.setTextColor(builderNoSearchBtnTextColor == 0 ? btnNoSearchTextColor : ContextCompat.getColor(mContext, builderNoSearchBtnTextColor));
+
 
         mPageStatusLayout.setBackgroundColor(builderBackgroundColor == 0 ? background : ContextCompat.getColor(mContext, builderBackgroundColor));
 
@@ -587,6 +733,15 @@ public class PageStatus extends FrameLayout {
             public void onClick(View v) {
                 if (mOnRetryListener != null) {
                     mOnRetryListener.retry(v);
+                }
+            }
+        });
+
+        btnSearch.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mOnSearchClick != null){
+                    mOnSearchClick.onSearchClick(v);
                 }
             }
         });
@@ -611,6 +766,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case LOADING_SUCCESS:
                 mPageStatusLayout.setVisibility(GONE);
@@ -624,6 +781,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case EMPTY_DATA:
                 mPageStatusLayout.setVisibility(VISIBLE);
@@ -634,6 +793,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case DATE_ERROR:
                 mPageStatusLayout.setVisibility(VISIBLE);
@@ -644,6 +805,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case EMPTY_CART:
                 mPageStatusLayout.setVisibility(VISIBLE);
@@ -654,6 +817,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(VISIBLE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case EMPTY_ORDER:
                 mPageStatusLayout.setVisibility(VISIBLE);
@@ -664,6 +829,8 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(VISIBLE);
                 mEmptyMsgLayout.setVisibility(GONE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
                 break;
             case EMPTY_MSG:
                 mPageStatusLayout.setVisibility(VISIBLE);
@@ -674,6 +841,35 @@ public class PageStatus extends FrameLayout {
                 mEmptyOrderLayout.setVisibility(GONE);
                 mEmptyMsgLayout.setVisibility(VISIBLE);
                 mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(GONE);
+                break;
+            case SEARCHING:
+                mPageStatusLayout.setVisibility(VISIBLE);
+                mStartLoadingLayout.setVisibility(GONE);
+                mEmptyDataLayout.setVisibility(GONE);
+                mNetworkErrorLayout.setVisibility(GONE);
+                mDataErrorLayout.setVisibility(GONE);
+                mEmptyOrderLayout.setVisibility(GONE);
+                mEmptyMsgLayout.setVisibility(GONE);
+                mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(VISIBLE);
+                mNoSearchLayout.setVisibility(GONE);
+
+                break;
+            case NO_SEARCH_RESULT:
+
+                mPageStatusLayout.setVisibility(VISIBLE);
+                mStartLoadingLayout.setVisibility(GONE);
+                mEmptyDataLayout.setVisibility(GONE);
+                mNetworkErrorLayout.setVisibility(GONE);
+                mDataErrorLayout.setVisibility(GONE);
+                mEmptyOrderLayout.setVisibility(GONE);
+                mEmptyMsgLayout.setVisibility(GONE);
+                mEmptyCartLayout.setVisibility(GONE);
+                mSearchingLayout.setVisibility(GONE);
+                mNoSearchLayout.setVisibility(VISIBLE);
+
                 break;
             default:
                 break;

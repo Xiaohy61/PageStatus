@@ -51,4 +51,16 @@
         android:layout_height="wrap_content"
         android:text="购物车是空的"/>
 
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="搜索中..."/>
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="搜索为空"/>
+
 </LinearLayout>
